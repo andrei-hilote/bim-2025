@@ -1,0 +1,491 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#fileInput {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+#loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.custom-layer-control {
+    margin: 10px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    background: white !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+}
+
+.panel-header {
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.panel-header:hover {
+    background: #ebebeb;
+}
+
+.panel-content {
+    padding: 5px;
+}
+
+.layers-list label {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+.layers-list input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.flood-risk-popup.modern {
+    font-family: 'Inter', sans-serif;
+    max-width: 400px;
+}
+
+.risk-gauge {
+    text-align: center;
+    margin-bottom: 20px;
+    transform-origin: center;
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.gauge-fill {
+    transition: stroke-dasharray 1s ease-in-out;
+}
+
+.gauge-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.gauge-label {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.rainfall-chart {
+    height: 200px;
+    margin: 20px 0;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 160px;
+}
+
+.chart-bar-group {
+    position: relative;
+    text-align: center;
+    flex: 1;
+}
+
+.chart-bar {
+    background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+    width: 20px;
+    margin: 0 auto;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.5s ease;
+    animation: growUp 0.5s ease-out;
+    transform-origin: bottom;
+}
+
+@keyframes growUp {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+.temp-indicator {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ef4444;
+    font-size: 12px;
+}
+
+.date-label {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.risk-factors-breakdown {
+    margin: 20px 0;
+}
+
+.risk-factor-item {
+    margin-bottom: 15px;
+}
+
+.factor-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.factor-bar-container {
+    background: #f3f4f6;
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+}
+
+.factor-bar {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.high-risk { background: linear-gradient(90deg, #ff9999, #ff0000); }
+.medium-risk { background: linear-gradient(90deg, #ffdb99, #ffa500); }
+.low-risk { background: linear-gradient(90deg, #99ff99, #00ff00); }
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.summary-item {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.summary-item i {
+    font-size: 24px;
+    color: #3b82f6;
+    margin-bottom: 5px;
+}
+
+.recommendations-list {
+    margin-top: 15px;
+}
+
+.recommendation-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 6px;
+}
+
+.recommendation-item i {
+    color: #22c55e;
+    margin-right: 10px;
+}
+
+.time-series-container {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.time-series-grid {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 2px;
+    height: 100px;
+    align-items: end;
+    padding: 10px 0;
+}
+
+.time-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.time-bar {
+    width: 100%;
+    background: var(--bar-color, #4ade80);
+    border-radius: 2px 2px 0 0;
+    transition: height 0.3s ease;
+}
+
+.time-bar.safe { --bar-color: #4ade80; }
+.time-bar.warning { --bar-color: #fbbf24; }
+.time-bar.danger { --bar-color: #ef4444; }
+
+.time-label {
+    font-size: 8px;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+.wind-rose-container {
+    width: 120px;
+    height: 120px;
+    margin: 15px auto;
+    position: relative;
+}
+
+.wind-rose {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.wind-arrow {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    width: 4px;
+    background: #3b82f6;
+    transform: translateX(-50%);
+    transition: height 0.3s ease;
+}
+
+.arrow-head {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid #3b82f6;
+}
+
+.wind-speed {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #1f2937;
+}
+
+.wind-direction {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.popup-enter {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ripple-circle {
+    animation: ripple-fade 2s ease-out forwards;
+}
+
+@keyframes ripple-fade {
+    0% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.risk-circle.pulse {
+    transition: fill-opacity 1.5s ease-in-out;
+}
+
+.progress-bar-container {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #3b82f6;
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: #4b5563;
+    text-align: center;
+}
+
+.collapse-icon {
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.layers-list {
+    margin-top: 10px;
+}
+
+.controls {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-input-label:hover {
+    background: #f5f5f5;
+}
+
+#fileInput {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loader-text {
+    font-size: 14px;
+    color: #666;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.flood-risk-popup {
+    max-width: 400px;
+    padding: 15px;
+}
+
+.risk-level-indicator {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.risk-level-indicator.high {
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff0000;
+}
+
+.risk-level-indicator.medium {
+    background-color: rgba(255, 165, 0, 0.1);
+    border: 1px solid #ffa500;
+}
+
+.risk-level-indicator.low {
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid #00ff00;
+}
+
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+} 
