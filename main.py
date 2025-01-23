@@ -753,7 +753,7 @@ body {
 
             async loadShapefile() {
                 try {
-                    const response = await fetch('http://192.168.60.236:8000/shapefile/waterways_romania.zip');
+                    const response = await fetch('https://bim-2025.onrender.com/shapefile/waterways_romania.zip');
                     if (!response.ok) throw new Error('Failed to fetch shapefile');
 
                     const arrayBuffer = await response.arrayBuffer();
@@ -903,7 +903,7 @@ body {
                 this.createRippleEffect(e.latlng);
 
                 try {
-                    const response = await fetch('http://192.168.60.236:8000/api/analyze', {
+                    const response = await fetch('https://bim-2025.onrender.com/api/analyze', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
