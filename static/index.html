@@ -225,6 +225,132 @@
     box-sizing: border-box;
 }
 
+.flood-risk-popup-container .leaflet-popup-content-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.flood-risk-popup {
+    min-width: 300px;
+    padding: 10px;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.risk-icon {
+    font-size: 24px;
+}
+
+.popup-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.4em;
+}
+
+.risk-stats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.stat-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon {
+    font-size: 20px;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.stat-label {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.risk-details {
+    background: rgba(245, 245, 245, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.risk-details h4 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+}
+
+.details-grid {
+    display: grid;
+    gap: 10px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-label {
+    color: #666;
+}
+
+.detail-value {
+    font-weight: 500;
+}
+
+.severity-high, .risk-critical {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.popup-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.action-button {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #3498db;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.action-button:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+}
+
 body {
     background-color: #fff;
     color: #333;
@@ -374,28 +500,702 @@ body {
 .container {
     position: relative;
     z-index: 2;
-} 
+}
 #filter-container {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
             padding: 15px;
             z-index: 1000;
         }
-        .filter-checkbox {
-            display: flex;
-            align-items: center;
-            margin: 8px 0;
+
+        #filter-container > div:first-child {
+    color: #2b6cb0;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-checkbox {
+    margin: 12px 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.filter-checkbox:hover {
+    background: rgba(43, 108, 176, 0.1);
+    transform: translateX(5px);
+}
+
+.filter-checkbox input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #2b6cb0;
+    border-radius: 6px;
+    margin-right: 12px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.filter-checkbox input[type="checkbox"]:checked {
+    background-color: #2b6cb0;
+    border-color: #2b6cb0;
+}
+
+.filter-checkbox input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.filter-checkbox input[type="checkbox"]:hover {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.filter-checkbox label {
+    font-size: 0.95em;
+    color: #4a5568;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+    flex-grow: 1;
+}
+
+.filter-checkbox:hover label {
+    color: #2b6cb0;
+}
+
+/* Water type specific icons */
+.filter-checkbox label::before {
+    font-family: Arial, sans-serif;
+    margin-right: 8px;
+    color: #2b6cb0;
+    font-size: 16px;
+}
+
+.filter-checkbox input[value="river"] + label::before {
+    content: '🌊';
+}
+
+.filter-checkbox input[value="stream"] + label::before {
+    content: '💧';
+}
+
+.filter-checkbox input[value="canal"] + label::before {
+    content: '⛵';
+}
+
+.filter-checkbox input[value="drain"] + label::before {
+    content: '🌧️';
+}
+
+.filter-checkbox input[value="ditch"] + label::before {
+    content: '➡️';
+}
+
+.filter-checkbox input[value="other"] + label::before {
+    content: '❔';
+}
+
+/* Animation for checkbox checking */
+.filter-checkbox input[type="checkbox"]:checked {
+    animation: checkmark 0.2s ease-in-out;
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Container entrance animation */
+#filter-container {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #filter-container {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+
+    .filter-checkbox {
+        padding: 10px;
+    }
+}
+
+
+       #control-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+/* Flood Zone Base Styles */
+.flood-zone {
+    transition: all 0.3s ease-in-out;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.flood-zone-appear {
+    animation: zoneAppear 0.8s ease-out forwards;
+}
+
+/* Risk Level Specific Styles */
+.flood-zone-high {
+    animation: pulseHigh 2s infinite;
+}
+
+.flood-zone-medium {
+    animation: pulseMedium 2.5s infinite;
+}
+
+.flood-zone-low {
+    animation: pulseLow 3s infinite;
+}
+
+/* Hover Effects */
+.flood-zone-hover {
+    filter: brightness(1.2);
+    transform: scale(1.01);
+}
+
+
+/* Legend Styles */
+.animated-legend {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    opacity: 0;
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.pulse-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    animation: pulseRing 2s infinite;
+}
+
+/* Popup Styles */
+.flood-zone-popup {
+    padding: 15px;
+    border-radius: 8px;
+    animation: popupAppear 0.3s ease-out;
+}
+
+.risk-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.depth-meter {
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.depth-bar {
+    height: 20px;
+    background: linear-gradient(90deg, #64b5f6, #1976d2);
+    transition: width 1s ease-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoneAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseHigh {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+    100% { filter: brightness(1); }
+}
+
+@keyframes pulseMedium {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+    100% { filter: brightness(1); }
+}
+
+@keyframes pulseLow {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.1); }
+    100% { filter: brightness(1); }
+}
+
+
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes popupAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Fade out animation */
+.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Pulse text animation for legend title */
+.pulse-text {
+    animation: pulseText 2s infinite;
+}
+
+@keyframes pulseText {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.control-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.control-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: #2c3e50;
+}
+
+.control-button .button-icon {
+    font-size: 18px;
+}
+
+.control-button .button-text {
+    white-space: nowrap;
+}
+
+/* Active States */
+#analysisButton.active {
+    background: #2c3e50;
+    color: white;
+    border-color: #2c3e50;
+}
+
+#inundationButton.active {
+    background: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+/* Disabled State */
+.control-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Loading State */
+.control-button.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.control-button.loading::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    from { left: -100%; }
+    to { left: 100%; }
+}
+
+/* Hover Effects */
+.control-button:hover .button-icon {
+    transform: scale(1.1);
+}
+
+/* Flood Zone Base Styles */
+.flood-zone {
+    transition: all 0.3s ease-in-out;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.flood-zone-appear {
+    animation: zoneAppear 0.8s ease-out forwards;
+}
+
+/* Risk Level Specific Styles */
+.flood-zone-high {
+    animation: pulseHigh 2s infinite;
+}
+
+.flood-zone-medium {
+    animation: pulseMedium 2.5s infinite;
+}
+
+.flood-zone-low {
+    animation: pulseLow 3s infinite;
+}
+
+/* Hover Effects */
+.flood-zone-hover {
+    filter: brightness(1.2);
+    transform: scale(1.01);
+}
+
+
+
+/* Legend Styles */
+.animated-legend {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    opacity: 0;
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.pulse-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    animation: pulseRing 2s infinite;
+}
+
+/* Popup Styles */
+.flood-zone-popup {
+    padding: 15px;
+    border-radius: 8px;
+    animation: popupAppear 0.3s ease-out;
+}
+
+.risk-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.depth-meter {
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.depth-bar {
+    height: 20px;
+    background: linear-gradient(90deg, #64b5f6, #1976d2);
+    transition: width 1s ease-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoneAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseHigh {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+    100% { filter: brightness(1); }
+}
+
+@keyframes pulseMedium {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+    100% { filter: brightness(1); }
+}
+
+@keyframes pulseLow {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.1); }
+    100% { filter: brightness(1); }
+}
+
+
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes popupAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Fade out animation */
+.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Pulse text animation for legend title */
+.pulse-text {
+    animation: pulseText 2s infinite;
+}
+
+@keyframes pulseText {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #control-panel {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+    }
+
+    .button-group {
+        justify-content: space-around;
+    }
+
+    .control-button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+      .inundation-polygon {
+        fill: url(#water-pattern) #3498db;
+        transition: all 0.3s ease;
+        animation: waterFlow 3s infinite linear;
+    }
+
+    .inundation-polygon:hover {
+        filter: brightness(1.2);
+    }
+
+    /* Water Pattern Animation */
+    @keyframes waterFlow {
+        0% {
+            stroke-dashoffset: 0;
         }
-        .filter-checkbox input {
-            margin-right: 10px;
+        100% {
+            stroke-dashoffset: 100;
         }
-        .filter-checkbox label {
-            flex-grow: 1;
-        }
+    }
+
+    /* Loading Animation */
+    .loading-overlay {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1001;
+        border-radius: 8px;
+    }
+
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+}
     </style>
 </head>
 <body>
@@ -415,7 +1215,7 @@ body {
         <source src="https://www.soundjay.com/mechanical/sounds/typewriter-key-1.mp3" type="audio/mpeg">
     </audio>
  </div>
- 
+
  <div id="filter-container">
         <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">Water Type Filter</div>
         <div class="filter-checkbox">
@@ -444,9 +1244,21 @@ body {
         </div>
         
     </div>
-    
+
+
     <div id="map"></div>
-    <button id="analysisButton" class="analysis-button">Start Analysis</button>
+
+<div id="control-panel">
+    <div class="button-group">
+        <button id="analysisButton" class="control-button">
+            <span class="button-text">📊 Start Analysis</span>
+        </button>
+        <button id="inundationButton" class="control-button">
+            <span class="button-text">💧 Show Flood Zones</span>
+        </button>
+    </div>
+</div>
+
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
@@ -643,6 +1455,7 @@ body {
                 this.loadShapefile();
                 this.initializeAnalysisButton();
                 this.setupFilterListeners();
+                this.initializeInundationButton();
                 
             }
 
@@ -665,7 +1478,7 @@ body {
                 button.addEventListener('click', () => {
                     this.isAnalysisMode = !this.isAnalysisMode;
                     button.classList.toggle('active');
-                    button.textContent = this.isAnalysisMode ? 'Cancel Analysis' : 'Start Analysis';
+                    button.textContent = this.isAnalysisMode ? '📊 Cancel Analysis' : '📊 Start Analysis';
                     
                     if (this.isAnalysisMode) {
                         this.map.on('click', this.handleMapClick.bind(this));
@@ -686,7 +1499,7 @@ body {
 
             async loadShapefile() {
                 try {
-                    const response = await fetch('http://192.168.60.236:8000/shapefile/waterways_romania.zip');
+                    const response = await fetch('/shapefile/waterways_romania.zip');
                     if (!response.ok) throw new Error('Failed to fetch shapefile');
 
                     const arrayBuffer = await response.arrayBuffer();
@@ -732,6 +1545,542 @@ body {
 
             this.filterWaterways();
         }
+
+        initializeInundationButton() {
+            const button = document.getElementById('inundationButton');
+            button.addEventListener('click', () => this.handleInundationToggle());
+
+        }
+
+        async handleInundationToggle() {
+    const button = document.getElementById('inundationButton');
+
+    if (this.inundationLayer) {
+        // Enhanced fade-out with wave effect
+        this.inundationLayer.eachLayer(layer => {
+            layer.getElement()?.classList.add('wave-fade-out');
+        });
+
+        setTimeout(() => {
+            this.map.removeLayer(this.inundationLayer);
+            this.inundationLayer = null;
+            if (this.legend) {
+                this.map.removeControl(this.legend);
+                this.legend = null;
+            }
+            if (this.warningOverlay) {
+                this.map.removeLayer(this.warningOverlay);
+                this.warningOverlay = null;
+            }
+        }, 800);
+
+        button.textContent = '💧Load Flood Zones';
+        button.classList.remove('active');
+        this.filterWaterways();
+    } else {
+        try {
+            button.textContent = '💧 Loading...';
+            button.disabled = true;
+
+            const response = await fetch('/shapefile/Archive.zip');
+            if (!response.ok) throw new Error('Failed to fetch inundation shapefile');
+
+            const arrayBuffer = await response.arrayBuffer();
+            const geojsonArray = await shp.parseZip(arrayBuffer);
+
+            const sendAlertNotification = async () => {
+            try {
+                // Show loading state
+                const alertButton = document.querySelector('.send-alert-btn');
+                if (alertButton) {
+                    alertButton.disabled = true;
+                    alertButton.innerHTML = '📤 Sending...';
+                }
+
+                const response = await fetch('/api/send-flood-alert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        // Your alert data here
+                        alertLevel: 'High',
+                        timestamp: new Date().toISOString(),
+                        // Add other relevant data
+                    })
+                });
+
+                if (!response.ok) throw new Error('Failed to send alert');
+
+                // Show success notification using a custom modal
+                const modal = document.createElement('div');
+                modal.className = 'alert-modal';
+                modal.innerHTML = `
+                    <div class="alert-modal-content">
+                        <div class="alert-modal-header">
+                            <span class="alert-modal-icon">✅</span>
+                            <h3>Alert Sent Successfully</h3>
+                        </div>
+                        <p>The flood risk alert has been sent to all registered recipients.</p>
+                        <button class="alert-modal-close-btn">Close</button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                // Add modal styles
+                const style = document.createElement('style');
+                style.textContent = `
+                    .alert-modal {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: rgba(0, 0, 0, 0.5);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        z-index: 1000;
+                    }
+                    .alert-modal-content {
+                        background: white;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                        max-width: 400px;
+                        width: 90%;
+                        text-align: center;
+                    }
+                    .alert-modal-header {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                        margin-bottom: 15px;
+                    }
+                    .alert-modal-icon {
+                        font-size: 24px;
+                    }
+                    .alert-modal-close-btn {
+                        margin-top: 15px;
+                        padding: 8px 16px;
+                        background: #007bff;
+                        color: white;
+                        border: none;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        transition: background 0.2s;
+                    }
+                    .alert-modal-close-btn:hover {
+                        background: #0056b3;
+                    }
+                `;
+                document.head.appendChild(style);
+
+                // Handle modal close
+                const closeBtn = modal.querySelector('.alert-modal-close-btn');
+                closeBtn.onclick = () => {
+                    modal.remove();
+                    style.remove();
+                };
+
+                // Reset button state
+                if (alertButton) {
+                    alertButton.disabled = false;
+                    alertButton.innerHTML = '🚨 Send Alert';
+                }
+
+            } catch (error) {
+                console.error('Error sending alert:', error);
+                // Show error notification
+                alert('Failed to send alert. Please try again.');
+
+                // Reset button state
+                const alertButton = document.querySelector('.send-alert-btn');
+                if (alertButton) {
+                    alertButton.disabled = false;
+                    alertButton.innerHTML = '🚨 Send Alert';
+                }
+            }
+        };
+
+            // Enhanced styling with danger indicators
+            const getFloodZoneStyle = (feature) => {
+                const riskLevel = feature.properties.risk_level?.toLowerCase() || 'high';
+                const depth = feature.properties.depth || 1;
+
+                const getColorConfig = () => {
+                    switch(riskLevel) {
+                        case 'high':
+                            return {
+                                fill: '#ff1744',
+                                border: '#d50000',
+                                pulseColor: 'rgba(255, 23, 68, 0.6)'
+                            };
+                        case 'medium':
+                            return {
+                                fill: '#ff9100',
+                                border: '#f57c00',
+                                pulseColor: 'rgba(255, 145, 0, 0.5)'
+                            };
+                        case 'low':
+                            return {
+                                fill: '#ffeb3b',
+                                border: '#fdd835',
+                                pulseColor: 'rgba(255, 235, 59, 0.4)'
+                            };
+                        default:
+                            return {
+                                fill: '#90caf9',
+                                border: '#64b5f6',
+                                pulseColor: 'rgba(144, 202, 249, 0.3)'
+                            };
+                    }
+                };
+
+                const colors = getColorConfig();
+                return {
+                    fillColor: colors.fill,
+                    color: colors.border,
+                    weight: 3,
+                    opacity: 0.9,
+                    fillOpacity: 0.4 + (depth * 0.15),
+                    className: `flood-zone flood-zone-${riskLevel} danger-zone`,
+                };
+            };
+
+            // Create and add the inundation layer with enhanced animations
+            this.inundationLayer = L.geoJSON(geojsonArray, {
+                style: getFloodZoneStyle,
+                onEachFeature: (feature, layer) => {
+                    // Add dramatic entrance animation
+                    layer.on('add', () => {
+                        setTimeout(() => {
+                            const el = layer.getElement();
+                            if (el) {
+                                el.classList.add('flood-zone-appear');
+                                // Add danger indicators for high-risk zones
+                                if (feature.properties.risk_level?.toLowerCase() === 'high') {
+                                    el.innerHTML += '<div class="danger-indicator"></div>';
+                                    el.innerHTML += '<div class="warning-pulse"></div>';
+                                }
+                            }
+                        }, Math.random() * 800);
+                    });
+
+                    layer.on({
+                        mouseover: (e) => {
+                            const layer = e.target;
+                            const riskLevel = feature.properties.risk_level?.toLowerCase() || 'medium';
+
+                            layer.setStyle({
+                                weight: 4,
+                                opacity: 1,
+                                fillOpacity: 0.85,
+                            });
+
+                            layer.getElement()?.classList.add('flood-zone-hover');
+                            layer.bringToFront();
+
+                            // Enhanced ripple effect
+                            const el = layer.getElement();
+                            if (el) {
+                                el.innerHTML += '<div class="ripple-danger"></div>';
+                                if (riskLevel === 'high') {
+                                    el.innerHTML += '<div class="danger-flash"></div>';
+                                }
+                                setTimeout(() => {
+                                    const ripple = el.querySelector('.ripple-danger');
+                                    const flash = el.querySelector('.danger-flash');
+                                    if (ripple) ripple.remove();
+                                    if (flash) flash.remove();
+                                }, 1500);
+                            }
+                        },
+                        mouseout: (e) => {
+                            const layer = e.target;
+                            this.inundationLayer.resetStyle(e.target);
+                            layer.getElement()?.classList.remove('flood-zone-hover');
+                        },
+                        click: async (e) => {
+                        this.createRippleEffect(e.latlng);
+
+                        const loadingOverlay = this.createLoadingOverlay(e.latlng);
+                        try {
+
+
+                        // Simulate data loading
+                        await new Promise(resolve => setTimeout(resolve, 5000));
+
+                        // Remove loading overlay and ripples
+                        loadingOverlay.remove();
+                        this.clearRipples();
+
+
+                        const data = {
+                            riskLevel: 'High',
+                            riskScore: '8.5/10',
+                            statistics: {
+                                buildings_in_area: 156,
+                                transportation_features: 23,
+                                landuse_areas: 12,
+                                known_inundation_areas: 3
+                            },
+                            mainFactors: [
+                                'Located within 100m of River Thames flood plain with historical overflow patterns',
+                                'Area elevation is 2.5m below surrounding regions, creating natural water collection point',
+                                'Aging drainage infrastructure (>30 years old) with limited capacity during peak flows',
+                                'Soil composition shows 65% clay content, reducing natural drainage capacity',
+                                'Urban development has reduced natural permeable surfaces by 40% over past decade',
+                                'Three major flood incidents recorded in the past 5 years (2019, 2021, 2023)',
+                                'Current flood defense structures rated as "requiring significant improvement"'
+                            ],
+                            weather: {
+                                temperature: 22,
+                                precipitation: 45,
+                                wind_speed: 15,
+                                condition: 'Heavy Rain'
+                            },
+                            concerns: [
+                                'Critical infrastructure vulnerability: Main power substation serving 50,000 households located in potential flood zone',
+                                'Emergency access routes: Both primary evacuation roads have history of flooding at depths >30cm',
+                                'Public safety: 3 schools and 1 care home within high-risk area require priority evacuation planning',
+                                'Economic impact: Business district with annual revenue >£10M at risk of operational disruption',
+                                'Environmental hazards: 2 fuel storage facilities in area pose contamination risk if flooded',
+                                'Historical sites: Grade II listed buildings require specialized flood protection measures',
+                                'Social vulnerability: 25% of residents are elderly or mobility-impaired requiring additional assistance'
+                            ],
+                            explanation: [
+                                'This area faces compound flood risks due to its topographical position and infrastructure conditions. The combination of riverine and surface water flooding presents a significant threat, particularly during high-rainfall seasons.',
+                                'Historical data shows increasing flood frequency, with events becoming more severe. The area\'s drainage system, designed in the 1980s, cannot cope with current precipitation patterns.',
+                                'Recent urban development has exacerbated the situation by reducing natural drainage capacity. Climate change projections indicate a 40% increase in extreme rainfall events by 2050.',
+                                'The presence of critical infrastructure and vulnerable populations makes this area a priority for flood management interventions. Economic analyses suggest potential losses of £25M+ in a major flood event.'
+                            ].join(' '),
+                            recommendations: [
+                                'Immediate Actions (0-6 months):\n' +
+                                '- Install automated flood warning systems at key monitoring points\n' +
+                                '- Conduct emergency response drills with local community\n' +
+                                '- Clear and maintain all drainage systems monthly',
+
+                                'Short-term Measures (6-12 months):\n' +
+                                '- Upgrade pump station capacity by 50%\n' +
+                                '- Install temporary flood barriers around critical infrastructure\n' +
+                                '- Develop detailed evacuation plans for vulnerable residents',
+
+                                'Medium-term Solutions (1-3 years):\n' +
+                                '- Implement sustainable drainage systems (SuDS)\n' +
+                                '- Create upstream water storage areas\n' +
+                                '- Retrofit buildings with flood resilience measures',
+
+                                'Long-term Strategy (3-5 years):\n' +
+                                '- Develop new flood defense infrastructure\n' +
+                                '- Restore natural floodplains\n' +
+                                '- Implement stricter building regulations for new developments'
+                            ]
+                        };
+
+                        const popupContent = `
+                            <div class="popup-content">
+                                <h3 class="popup-title">Flood Risk Analysis</h3>
+                                <p><strong>Risk Level:</strong> <span class="risk-level ${data.riskLevel.toLowerCase()}">${data.riskLevel}</span></p>
+                                <p><strong>Risk Score:</strong> ${data.riskScore}</p>
+
+                                <div class="risk-stats">
+                                    <div class="stat-box">
+                                        <div class="stat-icon">🏘️</div>
+                                        <div class="stat-content">
+                                            <div class="stat-value">${data.statistics.buildings_in_area}</div>
+                                            <div class="stat-label">Buildings at Risk</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="stat-box">
+                                        <div class="stat-icon">🛣️</div>
+                                        <div class="stat-content">
+                                            <div class="stat-value">${data.statistics.transportation_features}</div>
+                                            <div class="stat-label">Transport Features</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="stat-box">
+                                        <div class="stat-icon">🌳</div>
+                                        <div class="stat-content">
+                                            <div class="stat-value">${data.statistics.landuse_areas}</div>
+                                            <div class="stat-label">Land Use Areas</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="stat-box">
+                                        <div class="stat-icon">💧</div>
+                                        <div class="stat-content">
+                                            <div class="stat-value">${data.statistics.known_inundation_areas}</div>
+                                            <div class="stat-label">Known Flood Zones</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4>Main Factors</h4>
+                                <ul class="popup-list">
+                                    ${data.mainFactors.map(factor => `<li>${factor}</li>`).join('')}
+                                </ul>
+
+                                <div class="weather-section">
+                                    <h4>Weather Conditions</h4>
+                                    <div class="weather-grid">
+                                        <div class="weather-item">
+                                            <span>🌡️</span>
+                                            <span>${data.weather.temperature}°C</span>
+                                        </div>
+                                        <div class="weather-item">
+                                            <span>💧</span>
+                                            <span>${data.weather.precipitation}mm</span>
+                                        </div>
+                                        <div class="weather-item">
+                                            <span>💨</span>
+                                            <span>${data.weather.wind_speed} km/h</span>
+                                        </div>
+                                        <div class="weather-item">
+                                            <span>🌤️</span>
+                                            <span>${data.weather.condition}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4>Concerns</h4>
+                                <ul class="popup-list">
+                                    ${data.concerns.map(concern => `<li>${concern}</li>`).join('')}
+                                </ul>
+
+                                <h4>Explanation</h4>
+                                <ul class="popup-list">
+                                    <li>${data.explanation}</li>
+                                </ul>
+
+                                <h4>Recommendations</h4>
+                                <ul class="popup-list">
+                                    ${data.recommendations.map(recommendation => `<li>${recommendation}</li>`).join('')}
+                                </ul>
+                            </div>
+
+                                <!-- Add Send Alert button at the bottom -->
+                                <div class="alert-button-container" style="margin-top: 20px; text-align: center;">
+                                    <button
+                                        class="send-alert-btn"
+                                        style="
+                                            background: #dc3545;
+                                            color: white;
+                                            padding: 10px 20px;
+                                            border: none;
+                                            border-radius: 5px;
+                                            font-weight: bold;
+                                            cursor: pointer;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            gap: 8px;
+                                            margin: 0 auto;
+                                            transition: background-color 0.3s ease;
+                                        "
+                                        onclick="sendAlertNotification()"
+                                    >
+                                        🚨 Send Alert
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+
+                        // Attach the sendAlertNotification function to the window object
+                        window.sendAlertNotification = sendAlertNotification;
+
+                        layer.bindPopup(popupContent, {
+                            maxWidth: 500,
+                            className: 'flood-risk-popup-container'
+                        }).openPopup();
+
+
+                    } catch (error) {
+                        console.error('Error loading data:', error);
+                        loadingOverlay.remove();
+                        this.clearRipples();
+                    }
+
+
+
+                    }
+                    });
+                }
+            }).addTo(this.map);
+
+
+            // Add warning overlay for high-risk zones
+            const highRiskFeatures = geojsonArray.features.filter(f =>
+                f.properties.risk_level?.toLowerCase() === 'high'
+            );
+
+            if (highRiskFeatures.length > 0) {
+                this.warningOverlay = L.geoJSON(highRiskFeatures, {
+                    style: {
+                        fillColor: 'transparent',
+                        weight: 2,
+                        color: '#ff0000',
+                        opacity: 0.8,
+                        className: 'warning-boundary'
+                    }
+                }).addTo(this.map);
+            }
+
+            // Enhanced zoom animation
+            const bounds = this.inundationLayer.getBounds();
+            const paddedBounds = bounds.pad(0.15);
+
+            this.map.flyToBounds(paddedBounds, {
+                duration: 2.5,
+                easeLinearity: 0.25,
+                animate: true
+            });
+
+            button.textContent = '💧 Hide Flood Zones';
+            button.classList.add('active');
+        } catch (error) {
+            console.error('Error loading inundation data:', error);
+            button.textContent = '💧 Load Flood Zones';
+            alert('Error loading inundation data');
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+}
+
+createLoadingOverlay(latlng) {
+    const point = this.map.latLngToContainerPoint(latlng);
+    const overlay = L.DomUtil.create('div', 'loading-overlay');
+
+    Object.assign(overlay.style, {
+        left: `${point.x - 25}px`,
+        top: `${point.y - 25}px`,
+        width: '50px',
+        height: '50px'
+    });
+
+    const spinner = L.DomUtil.create('div', 'loading-spinner');
+    overlay.appendChild(spinner);
+
+    this.map.getContainer().appendChild(overlay);
+    return overlay;
+}
+    destroy() {
+        this.map.remove();
+        if (this.globe) {
+            this.globe.destroy();
+        }
+        if (this.inundationLayer) {
+            this.map.removeLayer(this.inundationLayer);
+        }
+        this.clearRipples();
+    }
+
+
         
         filterWaterways() {
             if (!this.waterLayer) return;
@@ -836,7 +2185,7 @@ body {
                 this.createRippleEffect(e.latlng);
 
                 try {
-                    const response = await fetch('http://192.168.60.236:8000/api/analyze', {
+                    const response = await fetch('api/analyze', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({

@@ -12,10 +12,6 @@ class SpatialDataStore:
     def __init__(self, db_path: str = "flood_data.db", cache_dir: str = "cache"):
         self.db_path = db_path
 
-        # Initialize disk cache for storing processed results
-
-
-        # Initialize spatial index
         self.index_path = Path("spatial_index")
         self.index_path.mkdir(exist_ok=True)
         self.spatial_index = rtree.index.Index(str(self.index_path / "rtree"))
