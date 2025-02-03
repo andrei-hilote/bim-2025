@@ -30,6 +30,8 @@ STATIC_DIR = Path("static")
 STATIC_DIR.mkdir(exist_ok=True)
 
 
+PHONE_NUMBERS = ["+40749884014", "+40767911992", "+40745480204"]
+
 twilio_client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 
@@ -141,12 +143,19 @@ Please share with neighbors and vulnerable residents. Stay safe!
 
 #FloodAlert #EmergencyResponse #CommunitySupport
         """
-        message = twilio_client.messages.create(
-            from_=TWILIO_PHONE_NUMBER,
-            body=message,
-            to=f"whatsapp:+40749884014"
-        )
-        return {"status": "success", "message_sid": message.sid}
+        messages = []
+        for number in PHONE_NUMBERS:
+            message = twilio_client.messages.create(
+                from_=TWILIO_PHONE_NUMBER,
+                body=message,
+                to=f"whatsapp:{number}"
+            )
+            messages.append(message.sid)
+
+        return {
+            "status": "success",
+            "message_sids": messages
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
