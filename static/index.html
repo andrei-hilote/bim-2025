@@ -1369,238 +1369,305 @@ body {
         <source src="https://www.soundjay.com/mechanical/sounds/typewriter-key-1.mp3" type="audio/mpeg">
     </audio>
  </div>
-
- <div id="filter-container">
-        <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">Water Type Filter</div>
-        <div class="filter-checkbox">
-            <input type="checkbox" id="river-check" value="river" checked>
-            <label for="river-check">River</label>
-        </div>
-        <div class="filter-checkbox">
-            <input type="checkbox" id="stream-check" value="stream">
-            <label for="stream-check">Stream</label>
-        </div>
-        <div class="filter-checkbox">
-            <input type="checkbox" id="canal-check" value="canal">
-            <label for="canal-check">Canal</label>
-        </div>
-        <div class="filter-checkbox">
-            <input type="checkbox" id="drain-check" value="drain">
-            <label for="drain-check">Drain</label>
-        </div>
-        <div class="filter-checkbox">
-            <input type="checkbox" id="ditch-check" value="ditch">
-            <label for="ditch-check">Ditch</label>
-        </div>
-        <div class="filter-checkbox">
-            <input type="checkbox" id="other-check" value="other">
-            <label for="other-check">Other</label>
-        </div>
-        
+<div id="filter-container" class="filter-panel glass-effect">
+  <div class="filter-header">
+    <h3>Water Type Filter</h3>
+  </div>
+  <div class="filter-content">
+    <div class="filter-checkbox">
+      <input type="checkbox" id="river-check" value="river" checked>
+      <label for="river-check">River</label>
     </div>
-
-
-    <div id="map"></div>
-
-<div class="map-qr-overlay">
-  <div class="qr-card collapsed">
-    <div class="qr-header">
-      <h3>Scan to Register</h3>
-      <button class="toggle-qr" aria-label="Toggle QR code">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 15l7-7 7 7"/>
-        </svg>
-      </button>
+    <div class="filter-checkbox">
+      <input type="checkbox" id="stream-check" value="stream">
+      <label for="stream-check">Stream</label>
     </div>
-    <div class="qr-content">
-      <div class="qr-image-container">
-
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#000000" d="M0 0.5h7m2 0h1m1 0h9m3 0h2m1 0h7M0 1.5h1m5 0h1m3 0h1m1 0h3m2 0h1m4 0h1m3 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m1 0h4m1 0h4m4 0h1m2 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h3m2 0h6m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m2 0h3m1 0h1m1 0h2m5 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h2m3 0h4m3 0h1m3 0h1m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h2m1 0h1m1 0h1m1 0h1m2 0h1m2 0h2m1 0h1M0 8.5h1m1 0h5m2 0h2m1 0h1m1 0h4m3 0h1m1 0h2m1 0h5M1 9.5h2m4 0h1m2 0h1m1 0h1m1 0h3m3 0h7m2 0h2m1 0h1M0 10.5h2m2 0h6m8 0h2m1 0h1m4 0h1m1 0h1m1 0h2M0 11.5h1m2 0h1m1 0h1m1 0h3m1 0h1m2 0h1m4 0h1m1 0h2m3 0h1m1 0h3m1 0h1M1 12.5h1m2 0h1m1 0h2m4 0h1m5 0h2m1 0h1m3 0h1m1 0h1m1 0h1m2 0h1M0 13.5h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m2 0h3m2 0h1m2 0h5M2 14.5h2m2 0h5m2 0h1m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1m2 0h2M2 15.5h4m2 0h1m4 0h1m2 0h6m2 0h3m1 0h3M0 16.5h2m1 0h1m2 0h2m1 0h1m2 0h1m3 0h2m1 0h1m3 0h3m1 0h2m3 0h1M1 17.5h1m1 0h1m3 0h1m8 0h3m1 0h1m2 0h1m2 0h2m1 0h2M0 18.5h4m2 0h1m3 0h1m1 0h2m1 0h1m1 0h1m4 0h1m3 0h1m1 0h1m1 0h2M0 19.5h1m1 0h1m4 0h2m5 0h2m1 0h2m7 0h1m1 0h3M0 20.5h3m3 0h1m3 0h1m2 0h2m1 0h1m2 0h5m1 0h2m2 0h1m1 0h2M0 21.5h4m3 0h2m5 0h2m1 0h2m9 0h1m1 0h1m1 0h1M0 22.5h1m2 0h1m2 0h1m2 0h1m2 0h2m1 0h2m1 0h1m1 0h5m2 0h2m1 0h2M0 23.5h1m1 0h3m3 0h1m1 0h1m1 0h2m1 0h1m1 0h2m4 0h3m1 0h1m1 0h1m2 0h1M0 24.5h1m1 0h1m1 0h5m3 0h1m1 0h2m4 0h2m1 0h10M8 25.5h1m1 0h1m1 0h1m3 0h1m1 0h1m2 0h1m2 0h1m3 0h1m1 0h2M0 26.5h7m3 0h1m2 0h1m4 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3M0 27.5h1m5 0h1m1 0h2m3 0h3m3 0h1m1 0h4m3 0h1m1 0h1m1 0h1M0 28.5h1m1 0h3m1 0h1m1 0h1m3 0h4m2 0h2m1 0h1m2 0h6M0 29.5h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h3m2 0h1m1 0h1m4 0h2M0 30.5h1m1 0h3m1 0h1m1 0h1m1 0h5m2 0h3m1 0h3m2 0h2M0 31.5h1m5 0h1m2 0h1m1 0h1m1 0h2m1 0h5m1 0h1m1 0h2m1 0h3M0 32.5h7m1 0h1m5 0h1m1 0h2m1 0h1m1 0h1m1 0h1m3 0h5"/></svg>
-        <div class="scan-overlay">
-          <div class="scan-line"></div>
-        </div>
-      </div>
-      <div class="qr-info">
-        <p>Get instant access to:</p>
-        <ul>
-          <li>Real-time flood alerts</li>
-          <li>Personalized risk assessment</li>
-          <li>Emergency notifications</li>
-        </ul>
-      </div>
+    <div class="filter-checkbox">
+      <input type="checkbox" id="canal-check" value="canal">
+      <label for="canal-check">Canal</label>
+    </div>
+    <div class="filter-checkbox">
+      <input type="checkbox" id="drain-check" value="drain">
+      <label for="drain-check">Drain</label>
+    </div>
+    <div class="filter-checkbox">
+      <input type="checkbox" id="ditch-check" value="ditch">
+      <label for="ditch-check">Ditch</label>
+    </div>
+    <div class="filter-checkbox">
+      <input type="checkbox" id="other-check" value="other">
+      <label for="other-check">Other</label>
     </div>
   </div>
-
-  <style>
-    .map-qr-overlay {
-      position: fixed;
-      left: 20px;
-      bottom: 100px;
-      z-index: 1000;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-
-    .qr-card {
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      overflow: hidden;
-      width: 300px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .qr-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 20px;
-      background: linear-gradient(135deg, #2193b0, #6dd5ed);
-      color: white;
-    }
-
-    .qr-header h3 {
-      margin: 0;
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-
-    .toggle-qr {
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      padding: 4px;
-      transition: transform 0.3s ease;
-    }
-
-    .toggle-qr:hover {
-      transform: translateY(-2px);
-    }
-
-    .qr-content {
-      padding: 20px;
-      transform-origin: top;
-      transition: all 0.3s ease;
-    }
-
-    .qr-image-container {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      margin: 0 auto 20px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .qr-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .qr-image:hover {
-      transform: scale(1.02);
-    }
-
-    .scan-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      pointer-events: none;
-    }
-
-    .scan-line {
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #2193b0, transparent);
-      animation: scanAnimation 2s linear infinite;
-    }
-
-    .qr-info {
-      color: #2c3e50;
-    }
-
-    .qr-info p {
-      margin: 0 0 10px;
-      font-weight: 500;
-    }
-
-    .qr-info ul {
-      margin: 0;
-      padding-left: 20px;
-      list-style-type: none;
-    }
-
-    .qr-info li {
-      position: relative;
-      padding: 4px 0;
-      padding-left: 24px;
-      font-size: 0.9rem;
-      color: #505c6e;
-    }
-
-    .qr-info li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: #2193b0;
-      font-weight: bold;
-    }
-
-    .collapsed .qr-content {
-      display: none;
-    }
-
-    .collapsed {
-      width: 180px;
-    }
-
-    .collapsed .toggle-qr svg {
-      transform: rotate(180deg);
-    }
-
-    @keyframes scanAnimation {
-      0% {
-        top: 0;
-      }
-      50% {
-        top: 100%;
-      }
-      100% {
-        top: 0;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .map-qr-overlay {
-        left: 10px;
-        bottom: 80px;
-      }
-
-      .qr-card {
-        width: 280px;
-      }
-
-      .collapsed {
-        width: 160px;
-      }
-    }
-  </style>
-
-  <script>
-    document.querySelector('.toggle-qr').addEventListener('click', function() {
-      const card = document.querySelector('.qr-card');
-      card.classList.toggle('collapsed');
-    });
-  </script>
 </div>
+
+    <div id="map"></div>
+<div class="qr-panel glass-effect">
+  <div class="qr-header">
+    <h3>
+      <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <path d="M7 7h4v4H7zM13 7h4v4h-4zM7 13h4v4H7z"/>
+      </svg>
+      Quick Register
+    </h3>
+    <button class="toggle-button" aria-label="Toggle QR panel">
+      <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+        <path d="M5 15l7-7 7 7"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="qr-content panel-content">
+    <div class="qr-image-container">
+      <div class="qr-image-wrapper">
+        <div class="scan-effect"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#000000" d="M0 0.5h7m2 0h1m1 0h9m3 0h2m1 0h7M0 1.5h1m5 0h1m3 0h1m1 0h3m2 0h1m4 0h1m3 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m1 0h4m1 0h4m4 0h1m2 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h3m2 0h6m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m2 0h3m1 0h1m1 0h2m5 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h2m3 0h4m3 0h1m3 0h1m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h2m1 0h1m1 0h1m1 0h1m2 0h1m2 0h2m1 0h1M0 8.5h1m1 0h5m2 0h2m1 0h1m1 0h4m3 0h1m1 0h2m1 0h5M1 9.5h2m4 0h1m2 0h1m1 0h1m1 0h3m3 0h7m2 0h2m1 0h1M0 10.5h2m2 0h6m8 0h2m1 0h1m4 0h1m1 0h1m1 0h2M0 11.5h1m2 0h1m1 0h1m1 0h3m1 0h1m2 0h1m4 0h1m1 0h2m3 0h1m1 0h3m1 0h1M1 12.5h1m2 0h1m1 0h2m4 0h1m5 0h2m1 0h1m3 0h1m1 0h1m1 0h1m2 0h1M0 13.5h1m1 0h1m2 0h1m2 0h1m2 0h1m1 0h5m2 0h3m2 0h1m2 0h5M2 14.5h2m2 0h5m2 0h1m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1m2 0h2M2 15.5h4m2 0h1m4 0h1m2 0h6m2 0h3m1 0h3M0 16.5h2m1 0h1m2 0h2m1 0h1m2 0h1m3 0h2m1 0h1m3 0h3m1 0h2m3 0h1M1 17.5h1m1 0h1m3 0h1m8 0h3m1 0h1m2 0h1m2 0h2m1 0h2M0 18.5h4m2 0h1m3 0h1m1 0h2m1 0h1m1 0h1m4 0h1m3 0h1m1 0h1m1 0h2M0 19.5h1m1 0h1m4 0h2m5 0h2m1 0h2m7 0h1m1 0h3M0 20.5h3m3 0h1m3 0h1m2 0h2m1 0h1m2 0h5m1 0h2m2 0h1m1 0h2M0 21.5h4m3 0h2m5 0h2m1 0h2m9 0h1m1 0h1m1 0h1M0 22.5h1m2 0h1m2 0h1m2 0h1m2 0h2m1 0h2m1 0h1m1 0h5m2 0h2m1 0h2M0 23.5h1m1 0h3m3 0h1m1 0h1m1 0h2m1 0h1m1 0h2m4 0h3m1 0h1m1 0h1m2 0h1M0 24.5h1m1 0h1m1 0h5m3 0h1m1 0h2m4 0h2m1 0h10M8 25.5h1m1 0h1m1 0h1m3 0h1m1 0h1m2 0h1m2 0h1m3 0h1m1 0h2M0 26.5h7m3 0h1m2 0h1m4 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3M0 27.5h1m5 0h1m1 0h2m3 0h3m3 0h1m1 0h4m3 0h1m1 0h1m1 0h1M0 28.5h1m1 0h3m1 0h1m1 0h1m3 0h4m2 0h2m1 0h1m2 0h6M0 29.5h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h3m2 0h1m1 0h1m4 0h2M0 30.5h1m1 0h3m1 0h1m1 0h1m1 0h5m2 0h3m1 0h3m2 0h2M0 31.5h1m5 0h1m2 0h1m1 0h1m1 0h2m1 0h5m1 0h1m1 0h2m1 0h3M0 32.5h7m1 0h1m5 0h1m1 0h2m1 0h1m1 0h1m1 0h1m3 0h5"/></svg>
+
+      </div>
+    </div>
+
+    <div class="qr-benefits">
+      <h4>Get Instant Access</h4>
+      <ul>
+        <li>
+          <span class="benefit-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"/>
+            </svg>
+          </span>
+          Real-time flood alerts
+        </li>
+        <li>
+          <span class="benefit-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </span>
+          Risk assessment
+        </li>
+        <li>
+          <span class="benefit-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            </svg>
+          </span>
+          Emergency alerts
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+:root {
+  --primary-color: #0891b2;
+  --primary-light: #22d3ee;
+  --secondary-color: #0e7490;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --background-light: #f8fafc;
+  --white: #ffffff;
+  --border-radius: 12px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+  --shadow-md: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Improved Glass Effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(8px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Enhanced QR Section */
+.qr-panel {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  width: 280px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.qr-header {
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qr-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qr-content {
+  padding: 16px;
+  background: white;
+}
+
+.qr-image-container {
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.qr-image-wrapper {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--primary-light),
+    transparent
+  );
+  animation: scanLine 2s linear infinite;
+}
+
+@keyframes scanLine {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.qr-benefits {
+  background: var(--background-light);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.qr-benefits h4 {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  margin: 0 0 12px;
+}
+
+.qr-benefits ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qr-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+.benefit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(8, 145, 178, 0.1);
+  border-radius: 6px;
+  color: var(--primary-color);
+}
+
+/* Toggle Buttons Enhancement */
+.toggle-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.toggle-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+  .qr-panel {
+    width: calc(100% - 32px);
+    left: 16px;
+    bottom: 80px;
+  }
+}
+
+/* Panel Collapse Animation */
+.collapsed {
+  transform: translateY(calc(100% - 48px));
+}
+
+.collapsed .panel-content {
+  display: none;
+}
+
+</style>
+
+<script>
+  document.querySelector('.toggle-button').addEventListener('click', function() {
+    const card = document.querySelector('.qr-panel');
+    card.classList.toggle('collapsed');
+    const svg = this.querySelector('svg');
+    svg.classList.toggle('rotated');
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const svg = document.querySelector('.toggle-button svg');
+    svg.classList.add('rotated');
+  });
+</script>
+
+<style>
+/* Rotate arrow when panel is collapsed */
+.rotated {
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+</style>
 
 <div id="control-panel">
     <div class="button-group">

@@ -93,7 +93,7 @@ async def send_group_message():
 
     """Send message to WhatsApp group"""
     try:
-        message = """
+        MESSAGE = """
             🚨 FLOOD RISK ALERT - HIGH PRIORITY 🚨
 
 📍 Area Risk Assessment:
@@ -143,18 +143,15 @@ Please share with neighbors and vulnerable residents. Stay safe!
 
 #FloodAlert #EmergencyResponse #CommunitySupport
         """
-        messages = []
         for number in PHONE_NUMBERS:
-            message = twilio_client.messages.create(
+            twilio_client.messages.create(
                 from_=TWILIO_PHONE_NUMBER,
-                body=message,
+                body=MESSAGE,
                 to=f"whatsapp:{number}"
             )
-            messages.append(message.sid)
 
         return {
             "status": "success",
-            "message_sids": messages
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
