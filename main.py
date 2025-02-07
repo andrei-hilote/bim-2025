@@ -94,54 +94,26 @@ async def send_group_message():
     """Send message to WhatsApp group"""
     try:
         MESSAGE = """
-            🚨 FLOOD RISK ALERT - HIGH PRIORITY 🚨
+🚨 URGENT FLOOD RISK ALERT - THAMES AREA 🚨
 
-📍 Area Risk Assessment:
-• Risk Level: HIGH (8.5/10)
-• Affected: 156 buildings, 23 transport routes
-• Known Flood Zones: 3 active areas
-
-🌊 Critical Concerns:
-• Power substation at risk (50,000 households)
-• Both evacuation routes show flooding >30cm
-• 3 schools & 1 care home in danger zone
-• Business district (£10M+ annual revenue) threatened
-• 2 fuel storage facilities at contamination risk
-
-⚠️ Current Conditions:
-• Temp: 22°C
-• Rain: 45mm
-• Wind: 15 km/h
-• Status: Heavy Rain
-
-🔍 Key Risk Factors:
-• 100m from Thames flood plain
-• Area 2.5m below surroundings
-• Drainage system over 30 years old
-• 65% clay soil reducing drainage
-• 40% reduction in natural drainage
-• 3 major floods in past 5 years
-
-👥 Vulnerable Population:
-• 25% elderly/mobility-impaired residents
-• Emergency assistance required
-
+Predicted Flood Event: [Feb 21-23, 2025]
+Forecasted Impact (Based on Real-Time & Historical Data):
+ 
+156 buildings and 23 transport routes expected to be affected
+3 known flood zones predicted to activate
+ 
 🚨 IMMEDIATE ACTIONS REQUIRED:
-1. Monitor flood warning systems
-2. Prepare for possible evacuation
-3. Clear drainage systems
-4. Check flood barriers
-
-📱 Stay alert for updates. Follow official channels for evacuation notices.
-
-🔗 Emergency Contacts:
-• Flood Helpline: [Insert Number]
-• Emergency Services: [Insert Number]
-• Council Support: [Insert Number]
-
-Please share with neighbors and vulnerable residents. Stay safe!
-
-#FloodAlert #EmergencyResponse #CommunitySupport
+Prepare for potential evacuation – monitor alerts closely
+Clear and inspect drainage systems to prevent blockages
+Verify flood barriers around critical infrastructure
+ 
+🆘 EMERGENCY CONTACTS:
+Evacuation Support: 112
+Medical Emergency: 113
+ 
+📱 Stay Alert for Real-Time Updates via official channels. Follow evacuation notices promptly.
+ 
+🔗 Share this alert with neighbors and vulnerable residents. Stay safe!
         """
         for number in PHONE_NUMBERS:
             twilio_client.messages.create(
